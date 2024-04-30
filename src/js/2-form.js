@@ -6,15 +6,17 @@ let formData = {
 	message: ""
 };
 
-
 const savedFormData = localStorage.getItem("feedback-form-state");
 if (savedFormData) {
 	formData = JSON.parse(savedFormData);
+	document.querySelector("[name='email']").value = formData.email;
+	document.querySelector("[name='message']").value = formData.message;
 }
 
 function saveFormData() {
 	localStorage.setItem("feedback-form-state", JSON.stringify(formData));
 }
+
 
 document.querySelector(".feedback-form").addEventListener("input", (event) => {
 	const { name, value } = event.target;
@@ -24,7 +26,6 @@ document.querySelector(".feedback-form").addEventListener("input", (event) => {
 
 document.querySelector(".feedback-form").addEventListener("submit", (event) => {
 	event.preventDefault();
-
 
 	if (formData.email && formData.message) {
 		console.log(formData);
